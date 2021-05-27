@@ -33,7 +33,7 @@ ln = net.getLayerNames()
 ln = [ln[i[0] - 1] for i in net.getUnconnectedOutLayers()]
 
 def Camera2():
-    print("Processsing Frames 2")
+    print("Entered Camera 2")
     video = cv2.VideoCapture('socialdistance/mylib/videos/test1.mp4')
     Camera2.count = 0
     Camera2.now = datetime.now()
