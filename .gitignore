@@ -1,0 +1,10 @@
+*.pyc
+*~
+/.vscode
+__pycache__
+env
+.idea
+db.sqlite3
+socialdistance/yolo/yolov3.weights
+/static
+.DS_Store
