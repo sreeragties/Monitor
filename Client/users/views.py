@@ -18,11 +18,6 @@ firebase = pyrebase.initialize_app(config)
 auth = firebase.auth()
 database = firebase.database()
 
-
-'''def indexView(request):
-    return render(request, 'index.html')'''
-
-
 def loginView(request):
     if request.method == 'POST':
         email = request.POST['email']
@@ -32,10 +27,19 @@ def loginView(request):
             user = auth.sign_in_with_email_and_password(email, password)
             session_id = user['idToken']
             request.session['uid'] = str(session_id)
-            return render(request, 'dashboard.html', {"email": email})
+            return redirect('dashboard')
 
         except:
             messages.error(request, "Invalid Credentials!!Please Check your Data")
             return redirect('login')
 
     return render(request, 'index.html')
+
+def dashboardView(request):
+    return render(request, 'dashboard.html')
+
+def camera1View(request):
+    return render(request, 'camera1.html')
+
+def camera2View(request):
+    return render(request, 'camera2.html')
