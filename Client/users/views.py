@@ -1,4 +1,5 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
+from django.contrib import messages
 import pyrebase
 
 # Create your views here.
@@ -14,23 +15,27 @@ config = {
 }
 
 firebase = pyrebase.initialize_app(config)
-authe = firebase.auth()
+auth = firebase.auth()
 database = firebase.database()
 
 
-def indexView(request):
-    return render(request, 'home3.html')
+'''def indexView(request):
+    return render(request, 'index.html')'''
 
 
-def postSignIn(request):
-    email = request.POST.get('email')
-    password = request.POST.get('pass')
-    try:
-        # if there is no error then signin the user with given email and password
-        user = authe.sign_in_with_email_and_password(email, password)
-    except:
-        message = "Invalid Credentials!!Please ChecK your Data"
-        return render(request, "home3.html", {"message": message})
-    session_id = user['idToken']
-    request.session['uid'] = str(session_id)
-    return render(request, "dashboard.html", {"email": email})
+def loginView(request):
+    if request.method == 'POST':
+        email = request.POST['email']
+        password = request.POST['pass']
+
+        try:
+            user = auth.sign_in_with_email_and_password(email, password)
+            session_id = user['idToken']
+            request.session['uid'] = str(session_id)
+            return render(request, 'dashboard.html', {"email": email})
+
+        except:
+            messages.error(request, "Invalid Credentials!!Please Check your Data")
+            return redirect('login')
+
+    return render(request, 'index.html')

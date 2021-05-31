@@ -1,0 +1,51 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+
+    <head>
+
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css">
+        <title>{% block title %} Social Distance Monitor {% endblock %}</title>
+
+        {% block link %}
+        <link rel="stylesheet" type="text/css" href="{% static 'login.css' %}">
+        {% endblock %}
+
+    </head>
+    <body>
+        {% block content %}
+
+         <div id="bod" class="d-flex align-items-center min-vh-100">
+            <div class="container bg-white border pl-4 pr-4 pt-4"  align="center" style="border-radius:7px; width:400px;">
+
+            <form action="{%url 'login' %}" method="post">
+                {% csrf_token %}
+                <br>
+                <!-- Enter Your Email: -->
+                <label for="Email">Email</label>
+                <input type="email"id="Email" name="email">
+                <br><br>
+                <!-- Enter Your Password: -->
+                <label for="Password">Password</label>
+                <input type="password" id="Password" name="pass">
+                <br><br>
+                <input type="submit" value="Login">
+
+                {% if messages %}
+                    {% for message in messages %}
+                        <div class="alert alert-danger" role="alert">
+                            <p style="color: red">{{ message }}</p>
+                        </div>
+                    {% endfor %}
+                {% endif %}
+            </form>
+
+            </div>
+            </div>
+
+        {% endblock %}
+    </body>
+</html>
