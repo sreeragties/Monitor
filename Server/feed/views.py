@@ -14,4 +14,4 @@ def indexView(request):
     t2.setDaemon(True)
     t1.start()
     t2.start()
-    return render(request, 'index.html')
+    return render(request, 'home3.html')
