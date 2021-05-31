@@ -5,6 +5,6 @@ __pycache__
 env
 .idea
 db.sqlite3
-socialdistance/yolo/yolov3.weights
+Server/socialdistance/yolo/yolov3.weights
 /static
 .DS_Store
